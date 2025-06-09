@@ -26,6 +26,7 @@ except:
     pass
 
 printedWarning = False
+printedAlert = False
 overTimeStart = 8 * 60 * 60
 while(True):
     lastTime = datetime.datetime.utcnow().timestamp()
@@ -40,7 +41,11 @@ while(True):
         writeFile.write(str(currTime))
         writeFile.close()
         if currTime > overTimeStart:
-            notification.notify(title = "OVERTIME ALERT",message="YOU'RE DOING OVERTIME FOR " + str((currTime - overTimeStart) / 60) + " MINUTES" , timeout=2)
+            if printedAlert:
+                notification.notify(title = "OVERTIME ALERT",message="YOU'RE DOING OVERTIME FOR " + str(int(currTime - overTimeStart) / 60) + " MINUTES" , timeout=5)
+            else:
+                notification.notify(title = "OVERTIME ALERT",message="YOU STARTED OVERTIME!", timeout=5)
+                printedAlert = True
         elif overTimeStart - currTime < 30 * 60 and not printedWarning:
             printedWarning = True
-            notification.notify(title = "OVERTIME WARNING",message="30 minutes left" , timeout=2)
+            notification.notify(title = "OVERTIME WARNING",message="30 minutes left" , timeout=5)
