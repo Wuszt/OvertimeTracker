@@ -42,7 +42,7 @@ while(True):
         writeFile.close()
         if currTime > overTimeStart:
             if printedAlert:
-                notification.notify(title = "OVERTIME ALERT",message="YOU'RE DOING OVERTIME FOR " + str(int(currTime - overTimeStart) / 60) + " MINUTES" , timeout=5)
+                notification.notify(title = "OVERTIME ALERT",message="YOU'RE DOING OVERTIME FOR " + str(int((currTime - overTimeStart) / 60)) + " MINUTES" , timeout=5)
             else:
                 notification.notify(title = "OVERTIME ALERT",message="YOU STARTED OVERTIME!", timeout=5)
                 printedAlert = True
