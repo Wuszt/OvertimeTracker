@@ -1,4 +1,5 @@
 from os import write
+import os
 import subprocess
 import time
 import datetime
@@ -11,7 +12,7 @@ def IsLocked():
     outputstringall=str(outputall)
     return process_name in outputstringall
 
-fileName = datetime.datetime.utcnow().strftime("OvertimeTracker.txt")
+fileName = os.environ["LOCALAPPDATA"] + "\\" + "OvertimeTracker.txt"
 currTime = 0
 
 try:
